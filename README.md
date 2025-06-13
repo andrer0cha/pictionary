@@ -14,13 +14,15 @@ A modern, web-based Pictionary game where you can draw, guess, and challenge you
 
 ## Tech Stack
 
-- **Frontend:** React (18+), TypeScript, TailwindCSS
-- **Bundler:** Vite
+- **Frontend:** React (18+), TypeScript, TailwindCSS, Vite
+- **Backend:** FastAPI (0.95+), Python 3.9+, Uvicorn
 
 ## Requirements
 
 - **Node.js** (v18 or newer)
 - **npm** (comes with Node.js)
+- **Python** (3.9 or newer)
+- **pip** (comes with Python)
 
 If you do not have these tools, follow the instructions below.
 
@@ -33,6 +35,16 @@ If you do not have these tools, follow the instructions below.
   npm -v
   ```
 
+### How to Install Python and pip
+- Go to [https://www.python.org/downloads/](https://www.python.org/downloads/) and download Python 3.9 or newer for your OS.
+- Install by following the instructions for your platform.
+- Make sure to check the box to add Python to your PATH during installation.
+- After installation, check with:
+  ```sh
+  python --version
+  pip --version
+  ```
+
 ## Installation
 
 1. **Clone the repository:**
@@ -41,7 +53,22 @@ If you do not have these tools, follow the instructions below.
    cd pictionary/
    ```
 
-2. **Install frontend dependencies:**
+2. **Set up the backend:**
+   ```sh
+   cd backend
+   # Create a Python virtual environment
+   python -m venv venv
+   # Activate the virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   # Install backend dependencies
+   pip install -r requirements.txt
+   cd ..
+   ```
+
+3. **Set up the frontend:**
    ```sh
    cd frontend
    npm install
@@ -50,14 +77,39 @@ If you do not have these tools, follow the instructions below.
 
 ## Running the Game
 
-1. **Start the frontend app:**
+1. **Start the backend server:**
+   ```sh
+   cd backend
+   # Activate the virtual environment if not already active
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   uvicorn main:socket_app --reload --host 0.0.0.0 --port 8000
+   ```
+   The backend will start on http://localhost:8000
+
+2. **Start the frontend app:**
    ```sh
    cd frontend
    npm run dev
    ```
+   The frontend will start on http://localhost:5173
 
-2. **Open your browser and go to:**
+3. **Open your browser and go to:**
    [http://localhost:5173](http://localhost:5173)
+
+## Troubleshooting
+
+- If you get `Failed to scan for dependencies from entries: ...` or `Cannot find module` errors when running `npm run dev`, make sure you:
+  - Are in the `frontend` directory when running `npm install` and `npm run dev`.
+  - Have a valid `package.json` in the `frontend` folder.
+  - If problems persist, try deleting `node_modules` and `package-lock.json`, then run `npm install` again:
+    ```sh
+    rm -rf node_modules package-lock.json
+    npm install
+    ```
+- If you get Python errors, make sure your virtual environment is activated and all dependencies are installed.
 
 ## How to Play
 
