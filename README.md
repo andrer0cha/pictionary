@@ -38,7 +38,7 @@ If you do not have these tools, follow the instructions below.
 1. **Clone the repository:**
    ```sh
    git clone <repo-url>
-   cd pictionary-game
+   cd pictionary/
    ```
 
 2. **Install frontend dependencies:**
