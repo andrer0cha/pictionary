@@ -41,7 +41,7 @@ A modern, web-based Pictionary game for solo play. Draw, guess, and track your s
    # Windows:
    venv\Scripts\activate
    pip install --upgrade pip setuptools wheel
-   pip install fastapi uvicorn
+   pip install -r requirements.txt
    cd ..
    ```
 
@@ -51,6 +51,14 @@ A modern, web-based Pictionary game for solo play. Draw, guess, and track your s
    npm install
    cd ..
    ```
+
+4. **Environment Variables:**
+   - Copy `.env.example` to `.env` in the backend directory:
+     ```sh
+     cd backend
+     cp .env.example .env
+     ```
+   - No additional secrets are required for local development
 
 ---
 
@@ -87,12 +95,29 @@ A modern, web-based Pictionary game for solo play. Draw, guess, and track your s
 
 ---
 
+## Project Structure
+```
+pictionary/
+├── backend/
+│   ├── venv/               # Python virtual environment (gitignored)
+│   ├── .env               # Environment variables (gitignored)
+│   ├── .env.example       # Example environment variables
+│   ├── requirements.txt   # Python dependencies
+│   └── main.py           # FastAPI application
+└── frontend/
+    ├── node_modules/      # Node.js dependencies (gitignored)
+    ├── package.json      # Node.js dependencies and scripts
+    └── src/              # React source code
+```
+
+---
+
 ## Troubleshooting
 
 - **Python 'externally-managed-environment' error (Linux/Python 3.11+):**
   Use:
   ```sh
-  pip install --break-system-packages fastapi uvicorn
+  pip install --break-system-packages -r requirements.txt
   ```
 - **macOS: 'Failed building wheel for pydantic-core':**
   - Install Xcode Command Line Tools:
@@ -102,7 +127,7 @@ A modern, web-based Pictionary game for solo play. Draw, guess, and track your s
   - Then run:
     ```sh
     pip install --upgrade pip setuptools wheel
-    pip install fastapi uvicorn
+    pip install -r requirements.txt
     ```
 - **npm install errors:**
   - Make sure you are in the `frontend` directory.

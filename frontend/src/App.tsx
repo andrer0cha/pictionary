@@ -52,7 +52,13 @@ const App: React.FC = () => {
   }, [score]);
 
   const fetchRandomWord = async () => {
-    const res = await fetch('http://localhost:8000/random-word');
+    const res = await fetch('http://localhost:8000/word', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ round_time: 60 })
+    });
     const data = await res.json();
     return data.word;
   };
