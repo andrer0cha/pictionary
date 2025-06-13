@@ -51,14 +51,20 @@ const App: React.FC = () => {
     localStorage.setItem('score', String(score));
   }, [score]);
 
+  const fetchRandomWord = async () => {
+    const res = await fetch('http://localhost:8000/random-word');
+    const data = await res.json();
+    return data.word;
+  };
+
   const handleStartGame = (selectedTime: number) => {
     setTimeLimit(selectedTime);
     setShowLobby(false);
     startGame(selectedTime);
   };
 
-  const startGame = (customTimeLimit?: number) => {
-    const word = WORDS[Math.floor(Math.random() * WORDS.length)];
+  const startGame = async (customTimeLimit?: number) => {
+    const word = await fetchRandomWord();
     setCurrentWord(word);
     setIsPlaying(true);
     setRoundStartTime(Date.now());
@@ -71,9 +77,9 @@ const App: React.FC = () => {
     }
   };
 
-  const handleNewRound = () => {
+  const handleNewRound = async () => {
     setShowGameOver(false);
-    const word = WORDS[Math.floor(Math.random() * WORDS.length)];
+    const word = await fetchRandomWord();
     setCurrentWord(word);
     setIsPlaying(true);
     setRoundStartTime(Date.now());

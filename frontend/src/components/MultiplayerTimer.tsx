@@ -54,21 +54,6 @@ const MultiplayerTimer: React.FC<MultiplayerTimerProps> = ({
     }
   };
 
-  // Test sound button
-  const testSound = () => {
-    if (audioContext) {
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-      gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.1);
-    }
-  };
-
   // Calculate time left based on server sync
   useEffect(() => {
     if (!isActive || !roundStartTime) {
@@ -155,9 +140,6 @@ const MultiplayerTimer: React.FC<MultiplayerTimerProps> = ({
             style={{ width: `${percentage}%` }}
           />
         </div>
-        <button onClick={testSound} className="mt-2 text-xs text-blue-600 hover:text-blue-800">
-          Testar Som
-        </button>
       </div>
     );
   }

@@ -5,7 +5,7 @@ A modern, web-based Pictionary game where you can draw, guess, and challenge you
 ## Features
 
 - 🖌️ Interactive drawing canvas
-- 🧩 Random word generator for each round
+- 🧩 Random word generator for each round (via backend API)
 - 📝 Guess what you just drew
 - 🏆 Local score tracking
 - ⏰ Configurable round timer with ticking sound
@@ -56,15 +56,12 @@ If you do not have these tools, follow the instructions below.
 2. **Set up the backend:**
    ```sh
    cd backend
-   # Create a Python virtual environment
    python -m venv venv
-   # Activate the virtual environment
    # On Windows:
    venv\Scripts\activate
    # On macOS/Linux:
    source venv/bin/activate
-   # Install backend dependencies
-   pip install -r requirements.txt
+   pip install fastapi uvicorn
    cd ..
    ```
 
@@ -85,7 +82,7 @@ If you do not have these tools, follow the instructions below.
    venv\Scripts\activate
    # On macOS/Linux:
    source venv/bin/activate
-   uvicorn main:socket_app --reload --host 0.0.0.0 --port 8000
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
    The backend will start on http://localhost:8000
 
@@ -114,7 +111,7 @@ If you do not have these tools, follow the instructions below.
 ## How to Play
 
 - Click "Start Drawing!" in the lobby.
-- Draw the word shown on the canvas.
+- Draw the word shown on the canvas (fetched from the backend).
 - Enter your guess for what you just drew in the input box.
 - Earn 10 points for each correct guess!
 - View your guess history for the current round.
